@@ -119,8 +119,10 @@ const styles = StyleSheet.create({
     },
     time: {
         textAlign: "right",
-        fontSize: 12,
-        opacity: 0.5
+        fontSize: 14,
+        opacity: 0.5,
+
+
     },
     buttonContainer: {
         flexDirection: "row",

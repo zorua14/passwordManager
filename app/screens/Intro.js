@@ -17,7 +17,7 @@ const IntroPage = ({ onFinish }) => {
     }
     return (
         <>
-            <StatusBar hidden />
+            {/* <StatusBar hidden /> */}
             <View style={styles.container}>
                 <Text style={styles.titleText}>Enter your name to Continue</Text>
                 <TextInput value={name} onChangeText={handleOnChangeText} placeholder="Enter Name" style={styles.textInput} />

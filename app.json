@@ -4,7 +4,7 @@
     "slug": "passwordManager",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/password-icon.png",
+    "icon": "./assets/last_icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/screen.png",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/password-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.delewhoop.passwordManager"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "225d2a9a-2c22-40ee-b089-28d59c6b9c29"
+      }
     }
   }
 }

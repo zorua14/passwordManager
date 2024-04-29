@@ -6,11 +6,15 @@ import DetailsModal from '../components/DetailsModal'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Password from '../components/Password'
 import { useDetails } from '../context/PasswordProvider'
+import { SafeAreaView } from 'react-native-safe-area-context'
+
+
 
 
 const ListScreen = ({ user, navigation }) => {
     const [modalVisible, SetModalVisible] = useState(false)
     const { details, setDetails, findDetails } = useDetails()
+
 
     const saveDetails = async (website, username, password) => {
         const detail = { id: Date.now(), website: website, username: username, password: password }
@@ -25,24 +29,29 @@ const ListScreen = ({ user, navigation }) => {
     }
     return (
         <>
-            <StatusBar barStyle='dark-content' backgroundColor={colors.LIGHT} />
-            <View style={styles.container}>
-                <Text style={styles.headerText}>{`Hello, ${user.name}`}</Text>
-                <FlatList
-                    data={details}
-                    keyExtractor={item => item.id.toString()}
-                    renderItem={({ item }) => <Password item={item} onPress={() => openPassword(item)} />}
-                />
-                {!details.length ?
-                    <View style={[StyleSheet.absoluteFillObject, styles.emptyContentContainer]}>
-                        <Text style={styles.emptyContentText}>Add Passwords</Text>
+            {/* <StatusBar style="auto" /> */}
+            <SafeAreaView style={{ flex: 1 }}>
 
-                    </View> : null}
-            </View>
+                <View style={styles.container}>
+                    <Text style={styles.headerText}>{`Hello, ${user.name}`}</Text>
+                    <FlatList
+                        data={details}
+                        keyExtractor={item => item.id.toString()}
+                        renderItem={({ item }) => <Password item={item} onPress={() => openPassword(item)} />}
+                    />
+                    {!details.length ?
+                        <View style={[StyleSheet.absoluteFillObject, styles.emptyContentContainer]}>
+                            <Text style={styles.emptyContentText}>Add Passwords</Text>
+
+                        </View> : null}
+                </View>
+            </SafeAreaView>
+
             <RoundIconButton onPress={() => {
                 SetModalVisible(true)
             }} antIconName='plus' style={styles.addButton} />
             <DetailsModal visible={modalVisible} onClose={() => SetModalVisible(false)} onSubmit={saveDetails} />
+
         </>
     )
 }
@@ -53,6 +62,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 20,
+
     },
     headerText: {
         fontSize: 25,

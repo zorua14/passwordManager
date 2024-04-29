@@ -1,20 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import IntroPage from "./app/screens/Intro";
+import { useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import ListScreen from "./app/screens/ListScreen";
+import PasswordTouched from "./app/components/PasswordTouched";
+import PasswordProvider from "./app/context/PasswordProvider";
 
+
+const Stack = createNativeStackNavigator();
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  const [user, setUser] = useState({})
+  const [runningFirstTime, setRunningFirstTime] = useState(false)
+
+  const findUser = async () => {
+    const result = await AsyncStorage.getItem('user')
+    if (result === null) return setRunningFirstTime(true)
+
+    setUser(JSON.parse(result))
+    setRunningFirstTime(false)
+
+  }
+
+  useEffect(() => {
+    findUser()
+  }, [])
+  const RenderListScreen = (props) => <ListScreen {...props} user={user} />
+  if (runningFirstTime) return <IntroPage onFinish={findUser} />
+  return <NavigationContainer>
+    <PasswordProvider>
+      <Stack.Navigator screenOptions={{ headerTitle: "", headerTransparent: true }}>
+        <Stack.Screen component={RenderListScreen} name="ListScreen" />
+        <Stack.Screen component={PasswordTouched} name="PasswordTouched" />
+      </Stack.Navigator>
+    </PasswordProvider>
+  </NavigationContainer>
+
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+

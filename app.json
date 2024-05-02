@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "passwordManager",
+    "name": "Password Manager",
     "slug": "passwordManager",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/last_icon.png",
+    "icon": "./assets/lock.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/screen.png",

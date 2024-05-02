@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/password-icon.png",
+        "foregroundImage": "./assets/lock.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.delewhoop.passwordManager"
